@@ -32,7 +32,6 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="btb" aria-hidden="true"><img src="art/bite-the-bullet.jpg" alt=""></div>
   <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
   <div class="cursor-glow" id="glow"></div>
   <div class="grain"></div>
@@ -52,11 +51,18 @@
     <div class="hero-stage">
       <a class="vfloat" href="#work" aria-label="Watch Cliff draw: a time-lapse reel of his pencil portraits. See the work">
         <span class="vp" id="vp">
-          <video src="video/drawing-reel.mp4" poster="video/drawing-reel.jpg" muted loop playsinline autoplay preload="auto"></video>
-          <span class="vp-shine"></span>
-          <span class="vp-chip"><i></i>Live from the sketchbook</span>
-          <span class="vp-bar"><b id="vpbar"></b></span>
+          <span class="vp-glow" aria-hidden="true"></span>
+          <span class="vp-ring" aria-hidden="true"></span>
+          <span class="vp-screen">
+            <video src="video/drawing-reel.mp4" poster="video/drawing-reel.jpg" muted loop playsinline autoplay preload="auto"></video>
+            <span class="vp-sweep" aria-hidden="true"></span>
+            <span class="vp-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="vp-hud" aria-hidden="true"><span><b class="dot"></b>REC</span><span id="vptc">00:00</span></span>
+            <span class="vp-bar" aria-hidden="true"><b id="vpbar"></b></span>
+          </span>
+          <span class="vp-floor" aria-hidden="true"></span>
         </span>
+        <span class="vp-label">Drawn by hand · time-lapse</span>
       </a>
     </div>
   </div>
@@ -377,7 +383,7 @@
       hero.addEventListener('mousemove',function(e){var r=hero.getBoundingClientRect(),cx=(e.clientX-r.left)/r.width-.5,cy=(e.clientY-r.top)/r.height-.5;
         vp.style.setProperty('--ry',(-16+cx*14)+'deg');vp.style.setProperty('--rx',(4-cy*10)+'deg');});
       hero.addEventListener('mouseleave',function(){vp.style.removeProperty('--ry');vp.style.removeProperty('--rx')});
-      v.addEventListener('timeupdate',function(){if(v.duration)bar.style.width=(v.currentTime/v.duration*100)+'%'});
+      var tc=document.getElementById('vptc');v.addEventListener('timeupdate',function(){if(!v.duration)return;bar.style.width=(v.currentTime/v.duration*100)+'%';var t=Math.floor(v.currentTime);tc.textContent='00:'+(t<10?'0':'')+t});
       if('IntersectionObserver' in window)new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})}).observe(vp);
     }
   })();
