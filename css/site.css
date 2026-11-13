@@ -237,3 +237,12 @@ footer.site a:hover{color:var(--text)}
 .browser-cta{position:absolute;right:16px;bottom:16px;font-size:13px;font-weight:600;color:#14081F;background:var(--grad);padding:8px 14px;border-radius:999px;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
 .browser:hover .browser-cta,.browser:focus-visible .browser-cta{opacity:1;transform:none}
 @media (max-width:900px){.browser{transform:none}}
+
+/* Mission section: night sky */
+.manifesto{overflow:hidden}
+.manifesto>.wrap{position:relative;z-index:2}
+.night{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 120%,rgba(139,92,246,.18),transparent 60%)}
+.night .fireflies{position:absolute;inset:0}
+.manifesto{padding-bottom:300px}
+.night .skyline{position:absolute;left:0;right:0;bottom:-30px;width:100%;min-width:900px;height:auto;aspect-ratio:1600/360;opacity:.6;will-change:transform;-webkit-mask-image:linear-gradient(to top,#000 35%,transparent);mask-image:linear-gradient(to top,#000 35%,transparent)}
+.manifesto .pillar{background:rgba(19,14,32,.82);backdrop-filter:blur(6px)}
