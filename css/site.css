@@ -243,17 +243,17 @@ footer.site a:hover{color:var(--text)}
 .manifesto>.wrap{position:relative;z-index:2}
 .night{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 120%,rgba(139,92,246,.18),transparent 60%)}
 .night .fireflies{position:absolute;inset:0}
-.manifesto{padding-bottom:300px}
-.night .skyline{position:absolute;left:0;right:0;bottom:-30px;width:100%;min-width:900px;height:auto;aspect-ratio:1600/360;opacity:.6;will-change:transform;-webkit-mask-image:linear-gradient(to top,#000 35%,transparent);mask-image:linear-gradient(to top,#000 35%,transparent)}
 .manifesto .pillar{background:rgba(19,14,32,.82);backdrop-filter:blur(6px)}
 
-/* Mission section: illustrated city */
-.night .city{position:absolute;left:0;right:0;bottom:-60px;height:78%;overflow:hidden;opacity:0;transition:opacity 1.2s;will-change:transform;-webkit-mask-image:linear-gradient(to top,#000 45%,transparent 100%);mask-image:linear-gradient(to top,#000 45%,transparent 100%)}
-.night.has-city .city{opacity:.62}
-.night.has-city .skyline{display:none}
-.night .city img{width:100%;height:100%;object-fit:cover;object-position:center 75%;animation:cityDrift 40s ease-in-out infinite alternate;filter:saturate(1.15) contrast(1.05)}
-@keyframes cityDrift{from{transform:scale(1.04) translateX(-1.2%)}to{transform:scale(1.12) translateX(1.2%)}}
-.night .city::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,5,13,.55),rgba(7,5,13,.15) 50%,rgba(7,5,13,.35))}
-.neon-pulse{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse 18% 30% at 52% 72%,rgba(34,211,238,.45),transparent 70%),radial-gradient(ellipse 16% 28% at 78% 70%,rgba(244,114,182,.45),transparent 70%),radial-gradient(ellipse 14% 24% at 20% 74%,rgba(167,139,250,.35),transparent 70%);animation:neonFlicker 6s infinite}
+/* Mission section: city background */
+.night .city{position:absolute;inset:0;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent)}
+.night .city-move{position:absolute;inset:-6%;will-change:transform}
+.night .city img{width:100%;height:100%;object-fit:cover;object-position:center 60%;opacity:.5;animation:cityDrift 36s ease-in-out infinite alternate}
+@keyframes cityDrift{from{transform:scale(1.02) translateX(-1%)}to{transform:scale(1.1) translateX(1%)}}
+.night .city::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,5,13,.72) 0%,rgba(7,5,13,.45) 55%,rgba(7,5,13,.25) 100%)}
+.neon-pulse{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse 14% 40% at 38% 55%,rgba(244,114,182,.35),transparent 70%),radial-gradient(ellipse 14% 40% at 22% 60%,rgba(34,211,238,.28),transparent 70%),radial-gradient(ellipse 20% 25% at 75% 40%,rgba(232,121,249,.25),transparent 70%);animation:neonFlicker 6s infinite}
 @keyframes neonFlicker{0%,100%{opacity:.75}8%{opacity:.4}9%{opacity:.8}45%{opacity:1}47%{opacity:.55}48%{opacity:.95}70%{opacity:.7}}
+.night .fireflies{z-index:1}
+.manifesto .big{text-shadow:0 2px 24px rgba(7,5,13,.6)}
 @media (prefers-reduced-motion:reduce){.night .city img,.neon-pulse{animation:none}}
+.manifesto .big .grad-text{text-shadow:none;filter:drop-shadow(0 2px 18px rgba(7,5,13,.55))}
