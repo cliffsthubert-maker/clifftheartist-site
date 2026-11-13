@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Man They Called Yasuke · A novel by Cliff St. Hubert</title>
+<meta name="description" content="The untold story of the African warrior who became samurai. A novel of Japan, love, and identity in the age of war and transformation, by Cliff St. Hubert.">
+<meta property="og:title" content="The Man They Called Yasuke · Cliff St. Hubert">
+<meta property="og:description" content="The untold story of the African warrior who became samurai.">
+<meta property="og:image" content="https://clifftheartist.com/images/yasuke-cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<style>
+/* Yasuke page: ink, paper and crimson, inside the site's dark frame */
+.yk{--crimson:#C0392B;--crimson-hi:#E05A4B;--paper:#F3EEE4;--gold:#C9A45C}
+.yk .serif{font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:0}
+.yk .eyebrow{color:var(--gold)}
+.yk .btn-primary{background:linear-gradient(100deg,#B03226,#E05A4B);color:#fff;box-shadow:0 10px 40px -10px rgba(224,90,75,.6)}
+.yk .btn-primary:hover{color:#fff;box-shadow:0 16px 50px -10px rgba(224,90,75,.85)}
+.yk .btn-ghost:hover{border-color:var(--crimson-hi)}
+.yk-red{color:var(--crimson-hi)}
+
+.yk-hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:130px 0 90px;overflow:hidden}
+.yk-hero .ink{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+.yk-hero .ink.a{width:640px;height:640px;background:#7A1E16;opacity:.45;top:-200px;right:-140px;animation:float 16s ease-in-out infinite}
+.yk-hero .ink.b{width:460px;height:460px;background:#3B2A12;opacity:.5;bottom:-160px;left:-120px;animation:float 20s ease-in-out infinite reverse}
+.enso{position:absolute;right:6%;top:50%;width:min(62vw,720px);aspect-ratio:1;transform:translateY(-50%);opacity:.12;pointer-events:none}
+.enso circle{fill:none;stroke:var(--paper);stroke-width:18;stroke-linecap:round;stroke-dasharray:1900 400;animation:draw 3.5s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes draw{from{stroke-dashoffset:2300}to{stroke-dashoffset:0}}
+.yk-hero .wrap{position:relative;display:flex;flex-wrap:wrap;gap:64px;align-items:center}
+.yk-copy{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:24px}
+.yk-copy h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(46px,7vw,92px);line-height:.98;letter-spacing:0}
+.yk-copy h1 small{display:block;font-size:.42em;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.yk-copy .tag{font-size:21px;color:var(--muted);max-width:560px}
+.yk-copy .by{font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.badge-yk{align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;border-radius:999px;border:1px solid var(--crimson-hi);color:var(--crimson-hi)}
+
+/* 3D book */
+.book3d{flex:1 1 300px;max-width:380px;margin:0 auto;perspective:1400px}
+.book3d .bk{position:relative;transform-style:preserve-3d;transform:rotateY(-24deg) rotateX(4deg);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.book3d:hover .bk{transform:rotateY(-8deg) rotateX(2deg)}
+.book3d img{width:100%;border-radius:3px 8px 8px 3px;box-shadow:30px 40px 80px -20px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.06)}
+.book3d .spine{position:absolute;top:0;left:0;width:36px;height:100%;transform-origin:left;transform:rotateY(90deg) translateZ(0);background:linear-gradient(90deg,#d9d2c4,#efe9de 40%,#cfc6b6);border-radius:3px 0 0 3px}
+.book3d .pages{position:absolute;top:1.5%;right:-1px;width:34px;height:97%;transform-origin:right;transform:rotateY(90deg) translateX(34px);background:repeating-linear-gradient(90deg,#f4efe6 0 2px,#e2dccf 2px 3px)}
+.book3d .shine{position:absolute;inset:0;border-radius:3px 8px 8px 3px;background:linear-gradient(105deg,rgba(255,255,255,.18),transparent 30%,transparent 70%,rgba(0,0,0,.18));pointer-events:none}
+
+/* Story text */
+.story{display:flex;flex-wrap:wrap;gap:64px}
+.story .lead-col{flex:1 1 280px;min-width:0}
+.story .lead-col h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(40px,5vw,64px);line-height:1.02;letter-spacing:0}
+.story .text-col{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:22px}
+.story .text-col p{font-size:19px;line-height:1.75;color:#D9D4E6}
+.story .text-col p:first-child::first-letter{font-family:'Cormorant Garamond',Georgia,serif;float:left;font-size:4.6em;line-height:.8;padding:8px 12px 0 0;color:var(--crimson-hi);font-weight:700}
+.pull{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(28px,3.4vw,40px);line-height:1.3;color:var(--paper);border-left:3px solid var(--crimson);padding-left:28px;margin:12px 0}
+
+/* Timeline */
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.tl{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px;border-top:3px solid var(--crimson)}
+.tl .yr{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;font-weight:700;color:var(--paper);line-height:1}
+.tl p{color:var(--muted);font-size:16px}
+
+/* Gallery */
+.gallery{columns:3 280px;column-gap:20px}
+.gallery figure{break-inside:avoid;margin:0 0 20px;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
+.gallery figure img{width:100%;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.gallery figure:hover img{transform:scale(1.04)}
+.gallery figcaption{padding:14px 18px;color:var(--muted);font-size:14px}
+.gallery .ph{min-height:260px;border-radius:0}
+.gallery .tall .ph{min-height:420px}
+.ai-note{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;margin-top:30px;padding:26px 30px;border-radius:20px;border:1px solid #3A2F55;background:var(--bg2)}
+.ai-note p{color:var(--muted);max-width:720px}
+.ai-note strong{color:var(--text)}
+
+/* Author */
+.author{display:flex;flex-wrap:wrap;gap:56px;align-items:center}
+.author .photo{flex:0 0 260px;max-width:260px;aspect-ratio:4/5;border-radius:24px;overflow:hidden;border:1px solid #3A2F55;margin:0 auto}
+.author .photo .ph{border-radius:24px}
+.author .bio{flex:999 1 460px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.author .bio h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(40px,5vw,60px);letter-spacing:0}
+.author .bio p{color:#D9D4E6;font-size:18px;line-height:1.7}
+.sig{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:28px;color:var(--gold)}
+
+/* Notify */
+.notify{text-align:center;padding:130px 0;position:relative;overflow:hidden}
+.notify h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(46px,8vw,104px);line-height:.95;letter-spacing:0}
+.notify p{color:var(--muted);font-size:19px;max-width:560px;margin:24px auto 34px}
+.notify .ctas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.kanji{font-family:'Cormorant Garamond',serif;font-size:min(42vw,420px);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:rgba(243,238,228,.035);pointer-events:none;line-height:1;white-space:nowrap}
+</style>
+</head>
+<body class="yk">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="index.html">CLIFF<span>·</span>THE ARTIST</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="links">Menu</button>
+    <nav class="links" id="links" aria-label="Main">
+      <a href="#story">The story</a>
+      <a href="#author">The author</a>
+      <a href="index.html">Home</a>
+      <a class="btn btn-primary" href="https://www.amazon.com/dp/B0H456PYZK">Buy the book</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="yk-hero">
+  <div class="ink a"></div><div class="ink b"></div><div class="grain"></div>
+  <svg class="enso" viewBox="0 0 800 800" aria-hidden="true"><circle cx="400" cy="400" r="340" transform="rotate(-70 400 400)"/></svg>
+  <div class="wrap">
+    <div class="yk-copy">
+      <span class="badge-yk">Available now</span>
+      <h1><small>The Man They Called</small>Yasuke</h1>
+      <p class="tag">The untold story of the African warrior who became samurai. A novel of Japan, love, and identity in the age of war and transformation.</p>
+      <p class="by">A novel by Cliff St. Hubert</p>
+      <div class="btn-row" style="display:flex;flex-wrap:wrap;gap:14px">
+        <a class="btn btn-primary" href="https://www.amazon.com/dp/B0H456PYZK">Buy on Amazon</a>
+        <a class="btn btn-ghost" href="#story">Read about the story</a>
+      </div>
+    </div>
+    <div class="book3d" aria-label="Book cover: The Man They Called Yasuke">
+      <div class="bk">
+        <img src="images/yasuke-cover.jpg" alt="Cover of The Man They Called Yasuke by Cliff St. Hubert: a samurai in ink wash behind a black enso circle and a katana">
+        <div class="spine"></div><div class="pages"></div><div class="shine"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="sec" id="story" style="background:var(--bg2);border-top:1px solid #1E1730;border-bottom:1px solid #1E1730">
+  <div class="wrap story">
+    <div class="lead-col">
+      <p class="eyebrow reveal">The story</p>
+      <h2 class="reveal d1" style="margin-top:14px">A stranger in a country at war.</h2>
+    </div>
+    <div class="text-col">
+      <p class="reveal">In 1579, a tall African man arrives in Japan in the service of Jesuit missionaries. Crowds gather in the streets to see him. Within two years he is standing beside Oda Nobunaga, the most feared warlord of his age, a man determined to unite a country that has been tearing itself apart for a century.</p>
+      <p class="reveal">Nobunaga gives him a name, a sword and a place at his side. They call him <em>Yasuke</em>.</p>
+      <blockquote class="pull reveal">He crossed oceans as a stranger. He became a samurai.</blockquote>
+      <p class="reveal"><strong>The Man They Called Yasuke</strong> is a literary historical novel of Japan, love and identity. It moves through the world of the warring lords: the courts and the battlefields, falconry and tea, rivals like the Takeda and men like Akechi Mitsuhide, whose ambitions will change everything. At its center is one man trying to hold on to who he was while becoming someone no one had imagined before.</p>
+      <p class="reveal">Built on deep historical research and told in a cinematic, intimate voice, this is the story of the African warrior history almost forgot.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow reveal">Inspired by history</p>
+        <h2 class="reveal d1 serif" style="margin-top:14px;text-transform:none;font-family:'Cormorant Garamond',Georgia,serif">The real Yasuke</h2>
+      </div>
+      <p class="reveal d2">The novel is fiction, built on the documented life of a real man.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl reveal"><span class="yr">1579</span><p>Arrives in Japan with the Jesuit mission of Alessandro Valignano.</p></div>
+      <div class="tl reveal d1"><span class="yr">1581</span><p>Meets Oda Nobunaga in Kyoto and enters his service.</p></div>
+      <div class="tl reveal d2"><span class="yr">1582</span><p>Is with Nobunaga's forces during the betrayal at Honnō-ji.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTHOR -->
+<section class="sec" id="author">
+  <div class="wrap author">
+    
+    <div class="bio">
+      <p class="eyebrow reveal">About the author</p>
+      <h2 class="reveal d1">Cliff St. Hubert</h2>
+      <p class="reveal d2">Cliff St. Hubert is a Miami-based writer, visual artist and television producer at Island TV. He writes historical and speculative fiction about people history tried to overlook, and brings a producer's eye for the cinematic to every page.</p>
+      <p class="reveal d2">He is also the founder of 3rd I AI, a creative studio built for independent storytellers and diaspora creators. His novels include <em>The Man They Called Yasuke</em>, the result of years of research and writing, and <a href="gaza.html"><em>The Last Prophet of Gaza</em></a>.</p>
+      <p class="sig reveal d3">Cliff St. Hubert</p>
+    </div>
+  </div>
+</section>
+
+<!-- NOTIFY -->
+<section class="notify" id="buy">
+  <span class="kanji" aria-hidden="true">弥助</span>
+  <div class="wrap" style="position:relative">
+    <p class="eyebrow reveal">Available now</p>
+    <h2 class="reveal d1" style="margin-top:18px">Get your<br><span class="yk-red">copy today.</span></h2>
+    <p class="reveal d2">Available now on Amazon. Want a signed copy, a book club visit or an interview? Message me.</p>
+    <div class="ctas reveal d3">
+      <a class="btn btn-primary" href="https://www.amazon.com/dp/B0H456PYZK">Buy on Amazon</a>
+      <a class="btn btn-ghost" href="https://wa.me/17865370675?text=Hi%20Cliff%2C%20I%27m%20reaching%20out%20about%20The%20Man%20They%20Called%20Yasuke">Contact the author</a>
+    </div>
+    <p class="details reveal d3" style="margin-top:28px;color:var(--dim);font-size:15px">(786) 537-0675 · clifftheartist@gmail.com</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Cliff St. Hubert · CTA Creative LLC</span>
+    <span><a href="index.html">Cliff the Artist</a><a href="https://www.instagram.com/cliffsthubert/">Instagram</a><a href="https://www.tiktok.com/@clifftheartist">TikTok</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  var onScroll=function(){nav.classList.toggle('scrolled',window.scrollY>30)};
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var btn=document.querySelector('.menu-btn'),links=document.getElementById('links');
+  btn.addEventListener('click',function(){var o=links.classList.toggle('open');btn.setAttribute('aria-expanded',String(o))});
+  links.addEventListener('click',function(e){if(e.target.tagName==='A'){links.classList.remove('open');btn.setAttribute('aria-expanded','false')}});
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window&&!reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+    els.forEach(function(el){io.observe(el)});
+  } else {els.forEach(function(el){el.classList.add('in')})}
+})();
+</script>
+</body>
+</html>
