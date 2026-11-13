@@ -37,10 +37,10 @@
   <div class="grain"></div>
   <div class="wrap">
     <div class="hero-copy">
-      <h1>
-        <span class="line"><span>Artist.</span></span>
-        <span class="line"><span class="outline">Author.</span></span>
-        <span class="line"><span class="grad-text">Creator.</span></span>
+      <h1 class="roles" aria-label="Artist. Author. Creator.">
+        <span class="line"><button class="role" data-act="0" aria-pressed="true"><span>Artist.</span></button></span>
+        <span class="line"><button class="role" data-act="1" aria-pressed="false"><span>Author.</span></button></span>
+        <span class="line"><button class="role" data-act="2" aria-pressed="false"><span>Creator.</span></button></span>
       </h1>
       <p class="lead">I draw, design, write novels, produce television, and build my own creative tools. Stories the industry overlooked, told with the craft they deserve.</p>
       <div class="ctas">
@@ -48,9 +48,33 @@
         <a class="btn btn-ghost" href="#studio">Work with me</a>
       </div>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <div class="stack-card c1" data-depth="18"><img src="art/son.jpg" alt=""></div>
-      <div class="stack-card c2" data-depth="-14"><img src="art/straight-outta-compton.jpg" alt=""></div>
+    <div class="showcase" id="showcase">
+      <div class="sc-frame">
+        <!-- ARTIST -->
+        <a class="act on" data-act="0" href="#work" aria-label="Artist: pencil portrait drawn by hand. See the work">
+          <video class="sc-media" src="art/son.mp4" poster="art/son.jpg" muted playsinline preload="auto"></video>
+          <span class="sc-tag"><b>01</b> Artist</span>
+          <span class="sc-cap"><strong>Drawn by hand.</strong> Pencil portraits, watched from first line to last.</span>
+        </a>
+        <!-- AUTHOR -->
+        <a class="act act-books" data-act="1" href="#books" aria-label="Author: two novels on Amazon. See the books">
+          <span class="books-bg"></span>
+          <span class="fan">
+            <img class="bk b1" src="images/gaza-cover-sm.jpg" alt="">
+            <img class="bk b2" src="images/yasuke-cover-sm.jpg" alt="">
+          </span>
+          <span class="sc-tag"><b>02</b> Author</span>
+          <span class="sc-cap"><strong>Two novels, out now.</strong> Historical fiction about people history tried to overlook.</span>
+        </a>
+        <!-- CREATOR -->
+        <a class="act" data-act="2" href="#studio" aria-label="Creator: promo videos, television and my own AI studio. See the studio">
+          <video class="sc-media" data-src="video/kekas-promo.mp4" poster="images/kekas-promo-poster.jpg" muted playsinline preload="none"></video>
+          <span class="mini-browser"><span class="dots"><i></i><i></i><i></i></span><img src="images/3rdiai-home.jpg" alt=""></span>
+          <span class="sc-tag"><b>03</b> Creator</span>
+          <span class="sc-cap"><strong>Promo videos, TV, and my own AI studio.</strong> Built for brands and storytellers.</span>
+        </a>
+      </div>
+      <div class="sc-bars" aria-hidden="true"><i data-act="0"><b></b></i><i data-act="1"><b></b></i><i data-act="2"><b></b></i></div>
     </div>
   </div>
   <div class="scroll-cue">Scroll</div>
@@ -355,15 +379,36 @@
     window.addEventListener('scroll',parallax,{passive:true});
     if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!running){running=true;raf=requestAnimationFrame(draw)}else if(!e.isIntersecting){running=false;cancelAnimationFrame(raf)}})}).observe(sec);}
   })();
-  var hero=document.querySelector('.hero'),glow=document.getElementById('glow'),cards=document.querySelectorAll('.stack-card');
+  var hero=document.querySelector('.hero'),glow=document.getElementById('glow');
   if(!reduce){
     hero.addEventListener('mousemove',function(e){
-      var r=hero.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
-      glow.style.left=x+'px';glow.style.top=y+'px';
-      var cx=(x/r.width-.5),cy=(y/r.height-.5);
-      cards.forEach(function(c){var d=+c.dataset.depth;var rot=c.classList.contains('c1')?5:-6;c.style.transform='translate('+(cx*d)+'px,'+(cy*d)+'px) rotate('+rot+'deg)'});
+      var r=hero.getBoundingClientRect();glow.style.left=(e.clientX-r.left)+'px';glow.style.top=(e.clientY-r.top)+'px';
     });
   }
+  // Hero showcase: each word shows its proof
+  (function(){
+    var sc=document.getElementById('showcase');if(!sc)return;
+    var acts=[].slice.call(sc.querySelectorAll('.act')),roles=[].slice.call(document.querySelectorAll('.role')),bars=[].slice.call(sc.querySelectorAll('.sc-bars i'));
+    var DUR=[10000,6000,9000],cur=0,timer=null,start=0,held=false;
+    function show(i,auto){
+      cur=i;
+      acts.forEach(function(a,k){a.classList.toggle('on',k===i);var v=a.querySelector('video');if(!v)return;
+        if(k===i){if(!v.src&&v.dataset.src)v.src=v.dataset.src;try{v.currentTime=0}catch(e){}if(!reduce){var p=v.play();if(p&&p.catch)p.catch(function(){})}}else v.pause();});
+      roles.forEach(function(r,k){r.setAttribute('aria-pressed',String(k===i));r.classList.toggle('on',k===i)});
+      bars.forEach(function(b,k){b.classList.toggle('done',k<i);b.classList.remove('run');});
+      clearTimeout(timer);
+      if(!reduce&&!held){void bars[i].offsetWidth;bars[i].style.setProperty('--d',DUR[i]+'ms');bars[i].classList.add('run');timer=setTimeout(function(){show((cur+1)%acts.length,true)},DUR[i]);}
+    }
+    roles.forEach(function(r,k){
+      r.addEventListener('mouseenter',function(){held=true;show(k)});
+      r.addEventListener('focus',function(){held=true;show(k)});
+      r.addEventListener('click',function(){held=true;show(k)});
+      r.addEventListener('mouseleave',function(){held=false;show(cur)});
+    });
+    sc.addEventListener('mouseenter',function(){held=true;clearTimeout(timer);bars[cur].classList.remove('run')});
+    sc.addEventListener('mouseleave',function(){held=false;show(cur)});
+    if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting){clearTimeout(timer);acts.forEach(function(a){var v=a.querySelector('video');if(v)v.pause()})}else show(cur)})},{threshold:.2}).observe(sc)}else show(0);
+  })();
 
   var fbtns=document.querySelectorAll('.filters button'),items=[].slice.call(document.querySelectorAll('#grid .item'));
   var more=document.getElementById('more'),LIMIT=12,expanded=false,filter='all';

@@ -67,11 +67,51 @@ p{margin:0}
 .hero .lead{font-size:20px;color:var(--muted);max-width:560px;opacity:0;animation:fade 1s .5s forwards}
 .hero .ctas{display:flex;flex-wrap:wrap;gap:14px;opacity:0;animation:fade 1s .7s forwards}
 @keyframes fade{to{opacity:1}}
-.hero-art{flex:1 1 340px;min-width:0;position:relative;height:520px;opacity:0;animation:fade 1.2s .4s forwards}
-.stack-card{position:absolute;border-radius:22px;overflow:hidden;border:1px solid #3A2F55;background:#150F24;box-shadow:0 40px 80px -30px rgba(0,0,0,.8);transition:transform .4s}
-.stack-card.c1{width:62%;aspect-ratio:4/5;right:4%;top:0;transform:rotate(5deg)}
-.stack-card.c2{width:56%;aspect-ratio:1/1;left:0;bottom:2%;transform:rotate(-6deg)}
-.stack-card img{width:100%;height:100%;object-fit:cover}
+/* Hero roles: each word is a switch */
+.hero h1.roles .role{all:unset;cursor:pointer;display:inline-block;font:inherit;color:var(--text);opacity:.28;-webkit-text-stroke:0;transition:opacity .5s,color .5s}
+.hero h1.roles .role span{display:inline-block;transform:translateY(105%);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1.roles .line:nth-child(2) .role span{animation-delay:.12s}
+.hero h1.roles .line:nth-child(3) .role span{animation-delay:.24s}
+.hero h1.roles .role:not(.on){color:transparent;-webkit-text-stroke:2px var(--lilac);opacity:.55}
+.hero h1.roles .role.on{opacity:1}
+.hero h1.roles .role.on span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1.roles .role:focus-visible{outline:2px solid var(--lilac);outline-offset:6px;border-radius:6px}
+/* Showcase frame */
+.showcase{flex:1 1 360px;min-width:0;max-width:470px;margin:0 auto;opacity:0;animation:fade 1.2s .4s forwards}
+.sc-frame{position:relative;aspect-ratio:4/5;border-radius:26px;overflow:hidden;border:1px solid #3A2F55;background:#0E0A18;box-shadow:0 50px 120px -40px rgba(168,85,247,.55),0 0 0 1px rgba(255,255,255,.04)}
+.act{position:absolute;inset:0;display:block;color:#fff;opacity:0;transform:scale(1.04);transition:opacity .8s,transform 1.2s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.act.on{opacity:1;transform:none;pointer-events:auto}
+.act::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,5,13,.5) 0,transparent 22%,transparent 55%,rgba(7,5,13,.92) 100%);pointer-events:none}
+.sc-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sc-tag{position:absolute;z-index:2;top:18px;left:18px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;padding:7px 14px;border-radius:999px;background:rgba(7,5,13,.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12)}
+.sc-tag b{color:var(--magenta);margin-right:6px}
+.sc-cap{position:absolute;z-index:2;left:22px;right:22px;bottom:22px;font-size:15px;line-height:1.5;color:#D9D4E6}
+.sc-cap strong{display:block;font-family:'Syne',sans-serif;font-size:21px;color:#fff;margin-bottom:4px}
+.act.on .sc-cap{animation:capIn .8s .25s both}
+@keyframes capIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* Author act */
+.books-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,#5C1B14 0,transparent 60%),radial-gradient(ellipse at 75% 60%,#2E3A1A 0,transparent 60%),#0B0710}
+.fan{position:absolute;inset:0;display:block;perspective:1200px}
+.bk{position:absolute;top:13%;width:46%;border-radius:3px 8px 8px 3px;box-shadow:24px 34px 60px -16px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.06);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.bk.b1{left:12%;transform:rotateY(18deg) rotate(-6deg) translateY(10px)}
+.bk.b2{right:12%;transform:rotateY(-18deg) rotate(5deg)}
+.act-books.on .bk.b1{animation:bk1 1.2s both}.act-books.on .bk.b2{animation:bk2 1.2s .1s both}
+@keyframes bk1{from{transform:rotateY(40deg) rotate(-14deg) translate(-30px,40px);opacity:0}}
+@keyframes bk2{from{transform:rotateY(-40deg) rotate(14deg) translate(30px,40px);opacity:0}}
+/* Creator act */
+.mini-browser{position:absolute;z-index:2;right:16px;top:64px;width:54%;border-radius:10px;overflow:hidden;background:#151020;border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 50px -10px rgba(0,0,0,.85);transform:rotate(3deg)}
+.mini-browser .dots{display:flex;gap:5px;padding:7px 9px;background:#1E1730}
+.mini-browser .dots i{width:7px;height:7px;border-radius:50%;background:#4A3F66}
+.mini-browser img{display:block;width:100%}
+.act.on .mini-browser{animation:mbIn 1s .2s both}
+@keyframes mbIn{from{opacity:0;transform:rotate(8deg) translate(30px,-10px)}}
+/* Progress bars */
+.sc-bars{display:flex;gap:8px;margin-top:16px}
+.sc-bars i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
+.sc-bars i b{display:block;height:100%;width:0;background:var(--grad)}
+.sc-bars i.done b{width:100%}
+.sc-bars i.run b{animation:barRun var(--d,6000ms) linear forwards}
+@keyframes barRun{to{width:100%}}
 .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;color:var(--dim);font-size:14px;background:linear-gradient(160deg,#1B1430,#120C1F);border:1px dashed #4A3D68;border-radius:inherit}
 .scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:12px;letter-spacing:.25em;color:var(--dim);text-transform:uppercase}
 .scroll-cue::after{content:"";display:block;width:1px;height:40px;margin:10px auto 0;background:linear-gradient(var(--lilac),transparent);animation:cue 2s infinite}
@@ -187,7 +227,8 @@ footer.site a:hover{color:var(--text)}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .hero h1 .line span{transform:none}
-  .hero .lead,.hero .ctas,.hero-art{opacity:1}
+  .hero .lead,.hero .ctas,.showcase{opacity:1}
+  .hero h1.roles .role span{transform:none}
   .reveal{opacity:1;transform:none}
 }
 
@@ -215,8 +256,8 @@ footer.site a:hover{color:var(--text)}
 .item.hide{display:none}
 .portfolio-note{text-align:center;color:var(--dim);font-size:15px;margin-top:24px}
 
-@media (max-width:900px){.hero-art{height:360px;max-width:460px;margin:0 auto;width:100%}}
-@media (max-width:520px){.hero-art{height:300px}}
+@media (max-width:900px){.showcase{max-width:420px;width:100%}.hero .scroll-cue{display:none}}
+@media (max-width:520px){.showcase{max-width:340px}.sc-cap strong{font-size:18px}.sc-cap{font-size:14px}}
 
 .logo{white-space:nowrap}
 @media (max-width:420px){.logo{font-size:16px}}
