@@ -73,13 +73,13 @@ p{margin:0}
 .vfloat{position:relative;display:block;width:min(100%,380px);color:#fff;text-decoration:none;animation:floaty 7s ease-in-out infinite}
 .vfloat:hover{color:#fff}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
-.vp{position:relative;display:block;aspect-ratio:4/5;border-radius:30px;transform-style:preserve-3d;
+.vp{position:relative;display:block;aspect-ratio:4/5;border-radius:30px;
   transform:rotateY(var(--ry,-14deg)) rotateX(var(--rx,5deg));transition:transform .9s cubic-bezier(.2,.8,.2,1)}
 .vfloat:hover .vp{--ry:-3deg;--rx:2deg}
 /* rotating light ring + its bloom */
 .vp-ring,.vp-glow{position:absolute;inset:-2px;border-radius:32px;
   background:conic-gradient(from var(--ang),#A78BFA,#E879F9 18%,transparent 34%,transparent 50%,#8B5CF6 66%,#F0ABFC 82%,#A78BFA);animation:spin 6s linear infinite}
-.vp-glow{inset:-14px;filter:blur(34px);opacity:.75}
+.vp-glow{inset:-2px;background:none;animation:none;box-shadow:0 0 40px 4px rgba(168,85,247,.55),0 0 110px 10px rgba(232,121,249,.28)}
 @keyframes spin{to{--ang:360deg}}
 /* glass bezel + screen */
 .vp-screen{position:absolute;inset:2px;border-radius:28px;overflow:hidden;background:#07050D;
