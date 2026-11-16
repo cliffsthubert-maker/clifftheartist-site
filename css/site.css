@@ -203,7 +203,8 @@ section{position:relative}
 .portrait{width:180px;height:180px;margin:0 auto;border-radius:50%;overflow:hidden;border:2px solid #5B4A85;box-shadow:0 0 0 8px rgba(139,92,246,.12),0 30px 80px -20px rgba(232,121,249,.5)}
 .portrait .ph{border-radius:50%;font-size:13px}
 .contact{text-align:center;padding:140px 0;overflow:hidden}
-.contact h2{font-size:clamp(54px,11vw,150px);font-weight:800;text-transform:uppercase;line-height:.9}
+.contact .wrap{container-type:inline-size}
+.contact h2{font-size:clamp(20px,9cqi,150px);font-weight:800;text-transform:uppercase;line-height:.9;white-space:nowrap}
 .contact p{color:var(--muted);font-size:19px;margin:26px auto 36px;max-width:560px}
 .contact .ctas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
 .contact .details{margin-top:30px;color:var(--dim);font-size:15px}
