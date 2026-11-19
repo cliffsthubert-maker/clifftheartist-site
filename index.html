@@ -373,6 +373,15 @@
   </div>
 </footer>
 
+<div class="art-lb" id="artlb" role="dialog" aria-modal="true" aria-label="Artwork viewer" hidden>
+  <button class="alb-x" type="button" aria-label="Close">&times;</button>
+  <button class="alb-nav alb-prev" type="button" aria-label="Previous">&#8249;</button>
+  <figure>
+    <div class="alb-frame"><span class="alb-ring" aria-hidden="true"></span><span class="alb-glow" aria-hidden="true"></span><div class="alb-art" role="img"></div><span class="alb-shield" aria-hidden="true"></span></div>
+    <figcaption><strong></strong><span></span></figcaption>
+  </figure>
+  <button class="alb-nav alb-next" type="button" aria-label="Next">&#8250;</button>
+</div>
 <script>
 (function(){
   var nav=document.getElementById('nav');
@@ -501,6 +510,33 @@
     vids.forEach(function(v){vio.observe(v)});
   }
 })();
+
+  // Artwork viewer: click a piece to see it large inside a turning purple light.
+  // Images are shown as a background behind a transparent shield, and right-click, drag and long-press saving are blocked.
+  (function(){
+    var lb=document.getElementById('artlb');if(!lb)return;
+    var art=lb.querySelector('.alb-art'),cap=lb.querySelector('figcaption'),last=null,list=[],cur=0;
+    function items(){return [].slice.call(document.querySelectorAll('#grid .item:not(.tl-item):not(.hide)')).filter(function(it){return it.querySelector('.media img')})}
+    function show(i){cur=(i+list.length)%list.length;var it=list[cur],img=it.querySelector('.media img');
+      art.style.backgroundImage='url("'+img.currentSrc.replace(/"/g,'')+'")';art.setAttribute('aria-label',img.alt||'');
+      var h=it.querySelector('.meta h3'),m=it.querySelector('.meta span');cap.querySelector('strong').textContent=h?h.textContent:'';cap.querySelector('span').textContent=m?m.textContent:'';
+      var probe=new Image();probe.onload=function(){art.style.aspectRatio=probe.naturalWidth+'/'+probe.naturalHeight;art.style.setProperty('--r',(probe.naturalWidth/probe.naturalHeight).toFixed(3))};probe.src=img.currentSrc}
+    function open(it){list=items();var i=list.indexOf(it);if(i<0)return;last=document.activeElement;lb.hidden=false;document.body.style.overflow='hidden';show(i);lb.querySelector('.alb-x').focus()}
+    function close(){lb.hidden=true;document.body.style.overflow='';if(last)last.focus()}
+    document.querySelectorAll('#grid .item:not(.tl-item)').forEach(function(it){var img=it.querySelector('.media img');if(!img)return;
+      var m=it.querySelector('.media');m.style.cursor='zoom-in';m.tabIndex=0;m.setAttribute('role','button');m.setAttribute('aria-label','View '+(img.alt||'artwork')+' larger');
+      img.draggable=false;m.addEventListener('click',function(){open(it)});m.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(it)}})});
+    lb.querySelector('.alb-x').onclick=close;
+    lb.querySelector('.alb-prev').onclick=function(e){e.stopPropagation();show(cur-1)};
+    lb.querySelector('.alb-next').onclick=function(e){e.stopPropagation();show(cur+1)};
+    lb.addEventListener('click',function(e){if(e.target===lb)close()});
+    document.addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1)});
+    var tx=null;lb.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+    lb.addEventListener('touchend',function(e){if(tx===null)return;var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)show(cur+(d<0?1:-1));tx=null});
+    // discourage saving
+    function guard(e){if(e.target.closest&&(e.target.closest('#grid .media')||e.target.closest('.art-lb')))e.preventDefault()}
+    document.addEventListener('contextmenu',guard);document.addEventListener('dragstart',guard);
+  })();
 </script>
 <script src="https://front-desk-production-c25a8715.up.railway.app/widget.js" data-business="cliff-the-artist" defer></script>
 </body>

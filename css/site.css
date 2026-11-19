@@ -336,3 +336,24 @@ footer.site a:hover{color:var(--text)}
 .ai-tool p{margin-top:6px;color:var(--muted);font-size:15px;line-height:1.55}
 @media (max-width:900px){.ai-tools{grid-template-columns:repeat(2,1fr)}.ai-sec{padding:90px 0}}
 @media (max-width:560px){.ai-tools{gap:12px}.ai-tool{padding:18px 16px}.ai-ico{width:40px;height:40px}.ai-tool h3{font-size:17px;margin-top:12px}.ai-tool p{font-size:13.5px}.ai-stage{margin-top:44px}}
+
+/* Artwork viewer with a turning purple light */
+.art-lb{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;gap:18px;padding:4vh 3vw;background:rgba(5,3,9,.94);backdrop-filter:blur(12px)}
+.art-lb[hidden]{display:none}
+.art-lb figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:22px;min-width:0}
+.alb-frame{position:relative;border-radius:18px;padding:3px;animation:albIn .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes albIn{from{opacity:0;transform:scale(.94)}}
+.alb-ring,.alb-glow{position:absolute;inset:-3px;border-radius:21px;background:conic-gradient(from var(--ang),#A78BFA,#E879F9 18%,transparent 34%,transparent 52%,#8B5CF6 68%,#F0ABFC 84%,#A78BFA);animation:spin 5s linear infinite}
+.alb-glow{inset:-18px;border-radius:36px;filter:blur(30px);opacity:.8}
+.alb-art{position:relative;z-index:1;width:min(84vw,calc(78vh * var(--r,1)));max-height:78vh;aspect-ratio:1/1;border-radius:15px;background:#0B0814 center/contain no-repeat;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.alb-shield{position:absolute;inset:3px;z-index:2;border-radius:15px;-webkit-touch-callout:none}
+.art-lb figcaption{text-align:center;display:flex;flex-direction:column;gap:4px}
+.art-lb figcaption strong{font-family:'Syne',sans-serif;font-size:20px;color:#fff}
+.art-lb figcaption span{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--lilac)}
+.art-lb button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;width:54px;height:54px;border-radius:50%;font-size:26px;cursor:pointer;flex:0 0 auto}
+.art-lb button:hover{background:rgba(232,121,249,.25)}
+.alb-x{position:absolute;top:20px;right:20px}
+#grid .media img{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+@media (max-width:640px){.alb-nav{position:absolute;bottom:22px}.alb-prev{left:22px}.alb-next{right:22px}.alb-art{max-height:68vh}}
+@media (prefers-reduced-motion:reduce){.alb-ring,.alb-glow,.alb-frame{animation:none}}
