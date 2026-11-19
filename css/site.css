@@ -357,3 +357,13 @@ footer.site a:hover{color:var(--text)}
 #grid .media img{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 @media (max-width:640px){.alb-nav{position:absolute;bottom:22px}.alb-prev{left:22px}.alb-next{right:22px}.alb-art{max-height:68vh}}
 @media (prefers-reduced-motion:reduce){.alb-ring,.alb-glow,.alb-frame{animation:none}}
+
+/* Behind the camera: masonry columns, each photo at its natural shape (no gaps) */
+.bc-grid{columns:3 280px;column-gap:14px}
+.bc-item{margin:0 0 14px;break-inside:avoid;position:relative;display:block;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--card);cursor:zoom-in}
+.bc-item img{display:block;width:100%;height:auto;transition:transform .7s cubic-bezier(.2,.8,.2,1);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.bc-item::after{content:attr(data-title);position:absolute;left:0;right:0;bottom:0;padding:28px 16px 12px;font-size:14px;font-weight:600;color:#fff;background:linear-gradient(transparent,rgba(7,5,13,.85));opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
+.bc-item:hover img{transform:scale(1.04)}.bc-item:hover::after,.bc-item:focus-visible::after{opacity:1;transform:none}
+.bc-item:focus-visible{outline:2px solid var(--lilac);outline-offset:3px}
+.bc-cta{text-align:center;margin-top:30px}
+@media (max-width:640px){.bc-grid{columns:2;column-gap:10px}.bc-item{margin-bottom:10px;border-radius:14px}}
